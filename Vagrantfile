@@ -1,5 +1,12 @@
 servers=[
   {
+    :hostname => "master",
+    :ip => "192.168.56.100",
+    :box => "debian/bookworm64",
+    :ram => 2048,
+    :cpu => 2
+  },
+  {
     :hostname => "box01",
     :ip => "192.168.56.10",
     :box => "debian/bookworm64",
