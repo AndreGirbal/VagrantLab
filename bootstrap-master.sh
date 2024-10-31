@@ -41,5 +41,5 @@ wget https://get.helm.sh/helm-v3.16.2-linux-amd64.tar.gz && tar -zxvf helm-v3.16
 /usr/local/bin/k3s server &
 cat /var/lib/rancher/k3s/server/node-token
 
-echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
-echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
+#echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
+#echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
