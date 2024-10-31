@@ -33,7 +33,10 @@ EOF
 sudo apt-get -y autoremove
 
 wget https://github.com/k3s-io/k3s/releases/download/v1.30.5%2Bk3s1/k3s -q --show-progress
-chmod +x k3s && sudo mv k3s /usr/local/bin/ 
+chmod +x k3s && sudo mv k3s /usr/local/bin/
+TOKEN=$(cat /vagrant/node-token)
+MASTER_IP="192.168.50.10"
+
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
