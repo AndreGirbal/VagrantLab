@@ -5,7 +5,7 @@ servers=[
     :box => "debian/bookworm64",
     :ram => 4096,
     :cpu => 2,
-    :provision => "bootstrap_master.sh"
+    :provision => "bootstrap-master.sh"
   },
   {
     :hostname => "box01",
