@@ -39,7 +39,7 @@ cd /root && echo "alias k=kubectl" >> .bashrc && source .bashrc
 wget https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 wget https://get.helm.sh/helm-v3.16.2-linux-amd64.tar.gz && tar -zxvf helm-v3.16.2-linux-amd64.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
 /usr/local/bin/k3s server &
-cat /var/lib/rancher/k3s/server/node-token
+cp /var/lib/rancher/k3s/server/node-token /vagrant/node-token
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
