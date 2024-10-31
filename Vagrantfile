@@ -43,6 +43,7 @@ servers=[
 
 Vagrant.configure(2) do |config|
 #    config.vm.provision :shell, path: "bootstrap.sh"
+    config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
     servers.each do |machine|
 
         config.vm.define machine[:hostname] do |node|
