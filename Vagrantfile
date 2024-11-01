@@ -6,47 +6,34 @@ servers=[
     :ram => 4096,
     :cpu => 2,
     :provision => "bootstrap-master.sh"
+  },
+  {
+    :hostname => "box01",
+    :ip => "192.168.56.10",
+    :box => "debian/bookworm64",
+    :ram => 2048,
+    :cpu => 1,
+    :provision => "bootstrap.sh"
+  },
+  {
+    :hostname => "box02",
+    :ip => "192.168.56.20",
+    :box => "debian/bookworm64",
+    :ram => 2048,
+    :cpu => 1,
+    :provision => "bootstrap.sh"
   }
-  # {
-    # :hostname => "box01",
-    # :ip => "192.168.56.10",
-    # :box => "debian/bookworm64",
-    # :ram => 2048,
-    # :cpu => 1,
-    # :provision => "bootstrap.sh"
-  # },
-  # {
-    # :hostname => "box02",
-    # :ip => "192.168.56.20",
-    # :box => "debian/bookworm64",
-    # :ram => 2048,
-    # :cpu => 1,
-    # :provision => "bootstrap.sh"
-  # },
-  # {
-    # :hostname => "box03",
-    # :ip => "192.168.56.30",
-    # :box => "debian/bookworm64",
-    # :ram => 2048,
-    # :cpu => 1,
-    # :provision => "bootstrap.sh"
-  # }
 
-#  {
-#    :hostname => "k8s",
-#    :ip => "192.168.56.50",
-#    :box => "debian/bookworm64",
-#    :ram => 4096,
-#    :cpu => 4
-#  }
+
 ]
 
 Vagrant.configure(2) do |config|
 #    config.vm.provision :shell, path: "bootstrap.sh"
     config.vm.synced_folder "./token", "/tmp/vagrant", type: "virtualbox"
-	config.ssh.username = 'root'
-    config.ssh.password = 'vagrant'
+#    config.ssh.username = 'root'
+#    config.ssh.password = 'vagrant'
 #    config.ssh.insert_key = 'true'
+    config.ssh.insert_key = false
     servers.each do |machine|
 
         config.vm.define machine[:hostname] do |node|

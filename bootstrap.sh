@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-get update
 sudo apt-get -y install ca-certificates curl gnupg open-iscsi git conntrackd conntrack
-sudo apt-get -y dist-upgrade
+#sudo apt-get -y dist-upgrade
 
 sudo systemctl start iscsid
 
@@ -35,7 +35,7 @@ sudo apt-get -y autoremove
 wget https://github.com/k3s-io/k3s/releases/download/v1.30.5%2Bk3s1/k3s -q --show-progress
 chmod +x k3s && sudo mv k3s /usr/local/bin/
 NODE_TOKEN=$(cat /tmp/vagrant/node-token)
-sudo k3s agent --server https://192.168.56.10:6443 --flannel-iface eth1 --token ${NODE_TOKEN}
+sudo nohup k3s agent --server https://192.168.56.10:6443 --flannel-iface eth1 --token ${NODE_TOKEN} &
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
