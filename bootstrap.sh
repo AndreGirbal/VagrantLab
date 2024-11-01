@@ -23,18 +23,18 @@ sudo install -m 0755 -d /etc/apt/keyrings
 
 mkdir -p /etc/rancher/k3s
 
-cat <<EOF >>/etc/rancher/k3s/registries.yaml
-mirrors:
-  docker.io:
-    endpoint:
-      - "https://reg.ntl.nc/v2/proxy/"
-EOF
+#cat <<EOF >>/etc/rancher/k3s/registries.yaml
+#mirrors:
+#  docker.io:
+#    endpoint:
+#      - "https://reg.ntl.nc/v2/proxy/"
+#EOF
 
 sudo apt-get -y autoremove
 
 wget https://github.com/k3s-io/k3s/releases/download/v1.30.5%2Bk3s1/k3s -q --show-progress
 chmod +x k3s && sudo mv k3s /usr/local/bin/
-NODE_TOKEN=$(cat /vagrant/node-token)
+NODE_TOKEN=$(cat /tmp/vagrant/node-token)
 sudo k3s agent --server https://192.168.56.10:6443 --flannel-iface eth1 --token ${NODE_TOKEN}
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf

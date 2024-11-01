@@ -23,15 +23,15 @@ sudo install -m 0755 -d /etc/apt/keyrings
 
 mkdir -p /etc/rancher/k3s
 
-cat <<EOF >>/etc/rancher/k3s/registries.yaml
-mirrors:
-  docker.io:
-    endpoint:
-      - "https://reg.ntl.nc/v2/proxy/"
-EOF
+#cat <<EOF >>/etc/rancher/k3s/registries.yaml
+#mirrors:
+#  docker.io:
+#    endpoint:
+#      - "https://reg.ntl.nc/v2/proxy/"
+#EOF
 
 sudo apt-get -y autoremove
-
+https://github.com/k3s-io/k3s/releases/download/v1.31.2%2Bk3s1/k3s
 wget https://github.com/k3s-io/k3s/releases/download/v1.30.5%2Bk3s1/k3s -q --show-progress
 chmod +x k3s && sudo mv k3s /usr/local/bin/ 
 
@@ -39,7 +39,9 @@ cd /root && echo "alias k=kubectl" >> .bashrc && source .bashrc
 wget https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 wget https://get.helm.sh/helm-v3.16.2-linux-amd64.tar.gz && tar -zxvf helm-v3.16.2-linux-amd64.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
 /usr/local/bin/k3s server &
-cp /var/lib/rancher/k3s/server/node-token /vagrant/node-token
+echo "k3s started"
+wait 10
+cp /var/lib/rancher/k3s/server/node-token /tmp/vagrant/node-token
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
