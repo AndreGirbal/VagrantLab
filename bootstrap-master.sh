@@ -39,7 +39,22 @@ cd /home/vagrant && echo "alias k=kubectl" >> .bashrc && source .bashrc
 wget https://dl.k8s.io/release/v1.30.5/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 wget https://get.helm.sh/helm-v3.16.2-linux-amd64.tar.gz && tar -zxvf helm-v3.16.2-linux-amd64.tar.gz && sudo mv linux-amd64/helm /usr/local/bin/
 
-sudo nohup /usr/local/bin/k3s server &
+sudo touch /lib/systemd/system/k3s.service
+sudo cat <<EOF >>/lib/systemd/system/k3s.service
+[Unit]
+Description=k3s server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/k3s server --bind-address 192.168.56.100
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable k3s.service && sudo systemctl start k3s.service
+
 echo "k3s started"
 sleep 15
 cp /var/lib/rancher/k3s/server/node-token /tmp/vagrant/node-token

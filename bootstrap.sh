@@ -34,8 +34,23 @@ sudo apt-get -y autoremove
 
 wget https://github.com/k3s-io/k3s/releases/download/v1.30.5%2Bk3s1/k3s -q --show-progress
 chmod +x k3s && sudo mv k3s /usr/local/bin/
-NODE_TOKEN=$(cat /tmp/vagrant/node-token)
-sudo nohup k3s agent --server https://192.168.56.10:6443 --flannel-iface eth1 --token ${NODE_TOKEN} &
+#K3S_TOKEN_FILE=$(cat /tmp/vagrant/node-token)
+
+sudo touch /lib/systemd/system/k3s-node.service
+sudo cat <<EOF >>/lib/systemd/system/k3s-node.service
+[Unit]
+Description=k3s node
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/k3s agent --server https://192.168.56.100:6443 --flannel-iface eth1 --token-file /tmp/vagrant/node-token
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable k3s-node.service && sudo systemctl start k3s-node.service
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf

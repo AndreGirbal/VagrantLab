@@ -24,15 +24,11 @@ servers=[
     :provision => "bootstrap.sh"
   }
 
-
 ]
 
 Vagrant.configure(2) do |config|
 #    config.vm.provision :shell, path: "bootstrap.sh"
     config.vm.synced_folder "./token", "/tmp/vagrant", type: "virtualbox"
-#    config.ssh.username = 'root'
-#    config.ssh.password = 'vagrant'
-#    config.ssh.insert_key = 'true'
     config.ssh.insert_key = false
     servers.each do |machine|
 
