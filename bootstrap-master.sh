@@ -47,7 +47,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/k3s server --bind-address 192.168.56.100
+ExecStart=/usr/local/bin/k3s server --bind-address 192.168.56.100 --disable traefik --disable servicelb --disable local-storage --flannel-iface eth1
 
 [Install]
 WantedBy=multi-user.target
