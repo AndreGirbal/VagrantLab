@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   rules:
-    - host: helloworld.k8s.qualif.gnc
+    - host: helloworld.local.lan
       http:
         paths:
           - path: /
