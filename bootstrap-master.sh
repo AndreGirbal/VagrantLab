@@ -59,6 +59,12 @@ echo "k3s started"
 sleep 15
 cp /var/lib/rancher/k3s/server/node-token /tmp/vagrant/node-token
 sudo mkdir /home/vagrant/.kube && sudo cp /etc/rancher/k3s/k3s.yaml /home/vagrant/.kube/config  && sudo chown vagrant:vagrant /home/vagrant/.kube/config
+sleep 15
+helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace --set controller.service.loadBalancerIP=10.0.2.15
+helm repo add argo https://argoproj.github.io/argo-helm
+helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace
+sleep 15
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d > /home/vagrant/argocd.pass
 
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf

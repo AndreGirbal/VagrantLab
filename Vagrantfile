@@ -14,15 +14,15 @@ servers=[
     :ram => 2048,
     :cpu => 1,
     :provision => "bootstrap.sh"
+  },
+  {
+    :hostname => "box02",
+    :ip => "192.168.56.20",
+    :box => "debian/bookworm64",
+    :ram => 2048,
+    :cpu => 1,
+    :provision => "bootstrap.sh"
   }
-  # {
-    # :hostname => "box02",
-    # :ip => "192.168.56.20",
-    # :box => "debian/bookworm64",
-    # :ram => 2048,
-    # :cpu => 1,
-    # :provision => "bootstrap.sh"
-  # }
 
 ]
 
