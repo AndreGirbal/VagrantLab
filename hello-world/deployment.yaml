@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: docker-registry.ref.gnc/nginx:1.25.3
+        image: nginx:1.25.3
         ports:
         - containerPort: 80
