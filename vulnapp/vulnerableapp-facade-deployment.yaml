@@ -35,7 +35,4 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
-          volumeMounts:
-            - mountPath: /etc/nginx/templates
-              name: vulnerableapp-facade-claim0
       restartPolicy: Always
