@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  ingressClassName: nginx
+  ingressClassName: appsec-nginx
   rules:
     - host: helloworld.local.lan
       http:
