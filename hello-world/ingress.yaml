@@ -5,6 +5,7 @@ metadata:
   namespace: hello-world
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+    openappsec.io/policy: open-appsec-best-practice-policy
 spec:
   ingressClassName: appsec-nginx
   rules:
