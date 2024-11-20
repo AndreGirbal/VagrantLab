@@ -27,7 +27,6 @@ servers=[
 ]
 
 Vagrant.configure(2) do |config|
-#    config.vm.provision :shell, path: "bootstrap.sh"
     config.vm.synced_folder "./token", "/tmp/vagrant", type: "virtualbox"
     config.ssh.insert_key = false
     servers.each do |machine|
@@ -35,8 +34,12 @@ Vagrant.configure(2) do |config|
         config.vm.define machine[:hostname] do |node|
             node.vm.box = machine[:box]
             node.vm.hostname = machine[:hostname]
-		#	node.vm.network "public_network"
             node.vm.network "private_network", ip: machine[:ip]
+			if node.vm.hostname == "master"
+			    config.vm.network "forwarded_port", id: "http", guest: 80, guest_ip: "10.0.2.15", host: 80, host_ip: "127.0.0.1"
+			    config.vm.network "forwarded_port", id: "https", guest: 443, guest_ip: "10.0.2.15", host: 443, host_ip: "127.0.0.1"
+				config.vm.network "forwarded_port", id: "argocd", guest: 443, guest_ip: "192.168.56.100", host: 8443, host_ip: "127.0.0.1"
+			end
             node.vm.provision :shell, path: machine[:provision]
             node.vm.provider "virtualbox" do |vb|
 			    vb.gui = true

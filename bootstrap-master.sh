@@ -66,5 +66,18 @@ helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace
 sleep 15
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d > /home/vagrant/argocd.pass
 
+KUBESEAL_VERSION='0.27.2'
+# Install Bitnami's Sealed Secrets controller in the sealed-secrets namespace.
+helm repo add bitnami-labs https://bitnami-labs.github.io/sealed-secrets/
+helm install -n sealed-secrets --create-namespace --wait --version ${KUBESEAL_VERSION:?} sealed-secrets-controller bitnami-labs/sealed-secrets
+# for selead-secret first install: kubectl get secret -n sealed-secrets -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > /tmp/vagrant/sealed-secret-key.yaml
+# if second install/cluster re-install: kubectl apply -n sealed-secrets -f /tmp/vagrant/sealed-secret-key.yaml
+# Beware this is for test purpose. Do not expose your keys if you're on a production cluster.
+
+wget "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION:?}/kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz"
+tar -xvzf kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+# to get the public cert: kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets-controller --fetch-cert
+
 #echo "nameserver 8.8.8.8" | sudo tee    /etc/resolv.conf
 #echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf

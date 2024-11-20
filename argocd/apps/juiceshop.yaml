@@ -10,7 +10,7 @@ spec:
   project: default
   revisionHistoryLimit: 5
   source:
-    path: juiceshop
+    path: apps/juiceshop
     repoURL: https://github.com/AndreGirbal/VagrantLab.git
     targetRevision: HEAD
   syncPolicy:

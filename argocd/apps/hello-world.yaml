@@ -10,7 +10,7 @@ spec:
   project: default
   revisionHistoryLimit: 5
   source:
-    path: hello-world
+    path: apps/hello-world
     repoURL: https://github.com/AndreGirbal/VagrantLab.git
     targetRevision: HEAD
   syncPolicy:
