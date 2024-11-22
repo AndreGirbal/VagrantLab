@@ -1,8 +1,6 @@
 podAnnotations:
   linkerd.io/inject: enabled
 
-namespaceOverride: grafana
-
 grafana.ini:
   server:
     root_url: '%(protocol)s://%(domain)s:/grafana/'
