@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: management-ui-ingress
   namespace: management-ui
+  labels:
+    role: ingress
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
