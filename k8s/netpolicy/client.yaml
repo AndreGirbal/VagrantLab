@@ -2,6 +2,8 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: client
+  annotations:
+    linkerd.io/inject: enabled
   labels:
     role: client
 ---
