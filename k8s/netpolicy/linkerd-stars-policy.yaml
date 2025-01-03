@@ -38,4 +38,4 @@ spec:
   requiredAuthenticationRefs:
     - name: frontend-meshtls-sa
       kind: MeshTLSAuthentication
-      group: policy.linkerd.io/
+      group: policy.linkerd.io
